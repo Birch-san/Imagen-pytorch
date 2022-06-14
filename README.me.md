@@ -7,16 +7,15 @@ https://gist.github.com/Birch-san/e1861d3af0f262dfb737ebb650eb8c4e
 # brew install git-lfs openblas
 brew install git-lfs
 git lfs install
-git clone https://huggingface.co/Cene655/ImagenT5-3B
-git clone https://github.com/xinntao/Real-ESRGAN.git
+# git clone https://huggingface.co/Cene655/ImagenT5-3B
+# git clone https://github.com/xinntao/Real-ESRGAN.git
+git submodule update --init --recursive
 python3 -m venv venv
 source ./venv/bin/activate
 python3 -m pip install --upgrade pip
 pip install wheel
 pip install .
-pip install git+https://github.com/openai/CLIP.git
-pip install basicsr
-pip install facexlib
+pip install git+https://github.com/openai/CLIP.git basicsr facexlib
 # if numpy tries to build-from-source, it will look for llvm-ar which doesn't exist in XCode toolchain
 # AR='/usr/bin/ar' OPENBLAS="$(brew --prefix openblas)" pip install gfpgan
 # Nix version:

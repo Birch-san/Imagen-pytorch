@@ -1,0 +1,6 @@
+[submodule "Real-ESRGAN"]
+	path = Real-ESRGAN
+	url = https://github.com/xinntao/Real-ESRGAN.git
+[submodule "ImagenT5-3B"]
+	path = ImagenT5-3B
+	url = https://huggingface.co/Cene655/ImagenT5-3B

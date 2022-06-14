@@ -1,9 +1,5 @@
 .DS_Store
 /venv/
-# these should really be submodules
-/ImagenT5-3B/
-/Real-ESRGAN/
-
 /build/
 /imagen_pytorch.egg-info/
 /GFPGANv*.pth
