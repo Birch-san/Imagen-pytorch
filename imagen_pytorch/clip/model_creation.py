@@ -11,6 +11,7 @@ from glide_text2im.tokenizer.simple_tokenizer import SimpleTokenizer
 
 from .encoders import ImageEncoder, TextEncoder
 
+from ..device import get_default_device_backend
 
 @lru_cache()
 def default_config_path() -> str:
@@ -72,7 +73,7 @@ def create_clip_model(
     if config_path is None:
         config_path = default_config_path()
     if device is None:
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = torch.device(get_default_device_backend())
     if tokenizer is None:
         tokenizer = SimpleTokenizer()
 

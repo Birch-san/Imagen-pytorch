@@ -8,6 +8,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from ..device import get_default_device_backend
+
 from .attention import (
     AttentionInfo,
     DenseAttentionMask,
@@ -27,7 +29,7 @@ class TextEmbedding(nn.Module):
     n_vocab: int = attr.ib()
     n_context: int = attr.ib()
     n_state: int = attr.ib()
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -55,7 +57,7 @@ class ImageEmbedding(nn.Module):
     patch_size: int = attr.ib()
     n_state: int = attr.ib()
     n_timestep: int = attr.ib(default=0)
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -134,7 +136,7 @@ class AttentionResblock(nn.Module):
     n_state: int = attr.ib()
     n_resblocks: int = attr.ib()
     attn_fn: AttentionInfo = attr.ib()
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -231,7 +233,7 @@ class FullyConnectedResblock(nn.Module):
 
     n_state: int = attr.ib()
     n_resblocks: int = attr.ib()
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -265,7 +267,7 @@ class TransformerBlock(nn.Module):
     n_state: int = attr.ib()
     n_resblocks: int = attr.ib()
     attn_fn: AttentionInfo = attr.ib()
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -286,7 +288,7 @@ class TransformerBlock(nn.Module):
 class TextFeatureExtractor(nn.Module):
     n_state: int = attr.ib()
     n_embd: int = attr.ib()
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -319,7 +321,7 @@ class TextFeatureExtractor(nn.Module):
 class ImageFeatureExtractor(nn.Module):
     n_state: int = attr.ib()
     n_embd: int = attr.ib()
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -343,7 +345,7 @@ class TextEncoder(nn.Module):
     n_head: int = attr.ib()
     n_xf_blocks: int = attr.ib()
     n_head_state: int = attr.ib(default=64)
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
     block_size: int = attr.ib(init=False, default=32)
 
     def __attrs_post_init__(self) -> None:
@@ -423,7 +425,7 @@ class ImageEncoder(nn.Module):
     n_xf_blocks: int = attr.ib()
     n_head_state: int = attr.ib(default=64)
     n_timestep: int = attr.ib(default=0)
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
     block_size: int = attr.ib(init=False, default=32)
 
     def __attrs_post_init__(self) -> None:

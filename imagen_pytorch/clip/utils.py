@@ -6,6 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from ..device import get_default_device_backend
+
 FilterFn = Callable[[torch.Tensor], torch.Tensor]
 
 
@@ -29,7 +31,7 @@ def zero_key_bias_grad(x: torch.Tensor) -> torch.Tensor:
 class LayerNorm(nn.Module):
     n_state: int = attr.ib()
     eps: float = attr.ib(default=1e-6)
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
@@ -53,7 +55,7 @@ class Affine(nn.Module):
     std: Optional[float] = attr.ib(default=None)
     extra_init_scale: Optional[float] = attr.ib(default=None)
     bias_filter_fn: FilterFn = attr.ib(default=lambda x: x)
-    device: torch.device = attr.ib(default=torch.device("cuda"))
+    device: torch.device = attr.ib(default=torch.device(get_default_device_backend()))
 
     def __attrs_post_init__(self) -> None:
         super().__init__()
